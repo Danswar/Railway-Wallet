@@ -4,6 +4,7 @@ apply plugin: "com.facebook.react"
 
 react {
     hermesEnabled = true
+    autolinkLibrariesWithApp()
 }
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
@@ -25,10 +26,10 @@ android {
 
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
-    namespace  "com.railway.rtp"
+    namespace  "swiss.dfx.railway"
 
     defaultConfig {
-        applicationId "com.railway.rtp"
+        applicationId "swiss.dfx.railway"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 125
@@ -92,16 +93,4 @@ dependencies {
         implementation jscFlavor
     }
 }
-
-afterEvaluate {
-    tasks.named('lintVitalAnalyzeRelease').configure {
-        dependsOn 'copyReactNativeVectorIconFonts'
-    }
-
-    tasks.named('generateReleaseLintVitalReportModel').configure {
-        dependsOn 'copyReactNativeVectorIconFonts'
-    }
-}
-
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 
